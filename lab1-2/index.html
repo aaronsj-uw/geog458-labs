@@ -1,0 +1,72 @@
+<!-- Tells the browser this file is an HTML document -->
+<!DOCTYPE html>
+<!-- Start of the page; lang='en' says the content is in English -->
+<html lang='en'>
+<!-- The head holds settings and resources that are not shown on the page itself -->
+<head>
+    <!-- Sets the character encoding so letters and symbols display correctly -->
+    <meta charset='utf-8' />
+    <!-- The text shown on the browser tab -->
+    <title>my First Map</title>
+    <!-- Makes the page fit the screen width on phones and tablets, at normal zoom -->
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <!-- Loads the Mapbox GL JS stylesheet, which styles the map and its controls -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.css" rel="stylesheet">
+    <!-- Loads the Mapbox GL JS library (version 3.6.0), which provides the mapboxgl object -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.js"></script>
+    <!-- Start of this page's own CSS rules -->
+    <style>
+        /* Removes the default spacing around the page so the map reaches the edges */
+        body { margin: 0; padding: 0; }
+        /* Stretches the element with id "map" from top to bottom and across the full width */
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+   </style>
+</head>
+<!-- The body holds everything that is displayed on the page -->
+<body>
+   <!-- An empty container; Mapbox draws the map inside this div -->
+   <div id='map'></div>
+   <script>
+      // My Mapbox public access token, which lets the page load Mapbox maps under my account
+      mapboxgl.accessToken = 'pk.eyJ1IjoiYWFyb25zaiIsImEiOiJjbXY0ZW5na3ExMmdxMndvZnU0bmg1NzdnIn0.0oHdhrXLwPW1MDSa-Ds8xg';
+      // Initialize the Mapbox instance and render the map inside the '#map' element
+      const mymap = new mapboxgl.Map({
+             // The id of the HTML element the map is drawn in (the div above)
+             container: 'map',
+             // style is commented out, so the map loads the default style, Mapbox Standard
+             // style: 'mapbox://styles/mapbox/light-v11',
+             // projection is commented out, so the map uses the default projection
+             // projection: 'globe',
+             // The starting center point as [longitude, latitude]; this is T-Mobile Park in Seattle's SoDo neighborhood
+             center: [-122.3325, 47.5914],
+             // The starting zoom level; higher numbers are closer in
+             zoom:15.8
+          });
+          // Adds a button that switches the map to fullscreen
+          mymap.addControl(new mapboxgl.FullscreenControl());
+          // Adds zoom in, zoom out, and compass buttons
+          mymap.addControl(new mapboxgl.NavigationControl());
+
+          // Waits for the style to finish loading, then configures the Standard basemap
+          mymap.on('style.load', () => {
+              // setConfigProperty changes one property of the Standard basemap.
+              // Sets the lighting to dusk
+              mymap.setConfigProperty('basemap', 'lightPreset', 'dusk');
+              // Hides all point of interest icons and text
+              mymap.setConfigProperty('basemap', 'showPointOfInterestLabels', false);
+
+              // Additional property 1: showTransitLabels set to false.
+              // Effect: hides all transit icons and text, such as light rail stations and bus stops.
+              // Useful when transit is not the subject of the map, since it removes icons
+              // that would distract from the ballpark and the streets around it.
+              mymap.setConfigProperty('basemap', 'showTransitLabels', false);
+
+              // Additional property 2: showRoadLabels set to false.
+              // Effect: hides all road labels, including road shields. The roads still draw.
+              // Useful when the basemap is a backdrop for my own data, since it leaves
+              // room for my own markers and labels.
+              mymap.setConfigProperty('basemap', 'showRoadLabels', false);
+          });
+   </script>
+</body>
+</html>
