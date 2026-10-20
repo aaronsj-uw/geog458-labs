@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>World Megacities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.js"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+        #title {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            padding: 8px 16px;
+            border-radius: 3px;
+            font-family: sans-serif;
+            font-size: 18pt;
+            font-weight: bold;
+        }
+
+        #legend {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 170px;
+            background: #fff;
+            margin-right: 20px;
+            margin-bottom: 40px;
+            padding: 10px 20px 10px 10px;
+            border-radius: 3px;
+            text-align: left;
+            font-family: sans-serif;
+        }
+
+        .break {
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dot {
+            display: inline-block;
+            margin-top: 5px;
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+
+        .dot-label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-style: italic;
+        }
+
+        #legend a {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="title">The World's Megacities</div>
+    <div id="legend"></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYWFyb25zaiIsImEiOiJjbXY0ZW5na3ExMmdxMndvZnU0bmg1NzdnIn0.0oHdhrXLwPW1MDSa-Ds8xg';
+
+        const mymap = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/dark-v11',
+            projection: 'globe',
+            center: [20, 20],
+            zoom: 1.3
+        });
+
+        mymap.on('load', () => {
+            mymap.addSource('population', {
+                type: 'geojson',
+                data: 'data/world-cities.geojson'
+            });
+
+            // Classification method: four classes with manual breaks at
+            // 1 million, 5 million, and 10 million people. The 10 million break follows the
+            // common definition of a megacity, so the top class shows the map's context.
+            // In this dataset of 19,321 cities, only 10 reach 10 million.
+            //
+            // Size scale: graduated circles (2, 4, 7, 12 px radius). The sizes are not
+            // proportional to population; they show class membership, with larger
+            // circles for larger classes.
+            //
+            // Color scale: a sequential scale from muted gray to bright red, so color
+            // grows with population and the red megacity class is the most visible.
+            mymap.addLayer({
+                id: 'population-layer',
+                type: 'circle',
+                source: 'population',
+                paint: {
+                    'circle-radius': [
+                        'step',
+                        ['to-number', ['get', 'population'], 0],
+                        2,
+                        1000000,  4,
+                        5000000,  7,
+                        10000000, 12
+                    ],
+                    'circle-color': [
+                        'step',
+                        ['to-number', ['get', 'population'], 0],
+                        '#bdbdbd',
+                        1000000,  '#fecc5c',
+                        5000000,  '#fd8d3c',
+                        10000000, '#e31a1c'
+                    ],
+                    'circle-opacity': 0.8
+                }
+            });
+
+            mymap.on('click', 'population-layer', (event) => {
+                const feature = event.features[0];
+                const coordinates = feature.geometry.coordinates.slice(0, 2);
+                const population = Number(feature.properties.population).toLocaleString();
+
+                new mapboxgl.Popup()
+                    .setLngLat(coordinates)
+                    .setHTML(`<strong>${feature.properties.accentcity}</strong><br>Population: ${population}`)
+                    .addTo(mymap);
+            });
+        });
+
+        const legend = document.getElementById('legend');
+        const grades = ['Under 1M', '1M to 5M', '5M to 10M', '10M+ (megacity)'];
+        const radii = [2, 4, 7, 12];
+        const colors = ['#bdbdbd', '#fecc5c', '#fd8d3c', '#e31a1c'];
+        const labels = ['<strong>Population</strong>'];
+
+        for (let i = 0; i < grades.length; i++) {
+            const value = grades[i];
+            const diameter = 2 * radii[i];
+
+            labels.push(
+                '<p class="break"><i class="dot" style="background:' + colors[i] +
+                '; width:' + diameter + 'px; height:' + diameter +
+                'px;"></i> <span class="dot-label" style="top:' +
+                diameter / 2 + 'px;">' + value + '</span></p>'
+            );
+        }
+
+        const source =
+            '<p style="text-align:right; font-size:10pt;">Source: ' +
+            '<a href="https://www.naturalearthdata.com/">Natural Earth</a></p>';
+
+        legend.innerHTML = labels.join('') + source;
+    </script>
+</body>
+</html>
