@@ -1,0 +1,185 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "site_id": "530330023",
+    "station_name": "ENUMCLAW - MUD MTN (Army Corp of Engineers site)",
+    "county": "King",
+    "date": "2025-05-30",
+    "ozone_ppb": 56,
+    "ozone_ppm": 0.056,
+    "units": "ppb",
+    "aqi": 54
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -121.9379,
+     47.1411
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "site_id": "530110011",
+    "station_name": "VANCOUVER - BLAIRMONT DR",
+    "county": "Clark",
+    "date": "2025-05-30",
+    "ozone_ppb": 54,
+    "ozone_ppm": 0.054,
+    "units": "ppb",
+    "aqi": 50
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -122.516667,
+     45.616667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "site_id": "530670013",
+    "station_name": "LACEY - COLLEGE ST",
+    "county": "Thurston",
+    "date": "2025-05-30",
+    "ozone_ppb": 54,
+    "ozone_ppm": 0.054,
+    "units": "ppb",
+    "aqi": 50
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -122.821548,
+     47.029396
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "site_id": "530330010",
+    "station_name": "ISSAQUAH - LAKE SAMMAMISH (Wiithin Lake Sammamish State Park)",
+    "county": "King",
+    "date": "2025-05-30",
+    "ozone_ppb": 52,
+    "ozone_ppm": 0.052,
+    "units": "ppb",
+    "aqi": 48
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -122.064722,
+     47.5525
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "site_id": "530330017",
+    "station_name": "NORTH BEND - NORTH BEND WAY",
+    "county": "King",
+    "date": "2025-05-30",
+    "ozone_ppb": 51,
+    "ozone_ppm": 0.051,
+    "units": "ppb",
+    "aqi": 47
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -121.77278,
+     47.49022
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "site_id": "530530012",
+    "station_name": "MT RAINIER - JACKSON VISITIORS CENTER",
+    "county": "Pierce",
+    "date": "2025-05-30",
+    "ozone_ppb": 51,
+    "ozone_ppm": 0.051,
+    "units": "ppb",
+    "aqi": 47
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -121.740367,
+     46.7841
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "site_id": "530330080",
+    "station_name": "SEATTLE - BEACON HILL",
+    "county": "King",
+    "date": "2025-05-30",
+    "ozone_ppb": 44,
+    "ozone_ppm": 0.044,
+    "units": "ppb",
+    "aqi": 41
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -122.308628,
+     47.568236
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "site_id": "530730005",
+    "station_name": "CUSTER - LOOMIS",
+    "county": "Whatcom",
+    "date": "2025-05-30",
+    "ozone_ppb": 44,
+    "ozone_ppm": 0.044,
+    "units": "ppb",
+    "aqi": 41
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -122.55441,
+     48.95074
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "site_id": "530570011",
+    "station_name": "Anacortes-202 Ave",
+    "county": "Skagit",
+    "date": "2025-05-30",
+    "ozone_ppb": 34,
+    "ozone_ppm": 0.034,
+    "units": "ppb",
+    "aqi": 31
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -122.61428,
+     48.52059
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,11 @@
+{
+ "source": "U.S. EPA AirData, Download Daily Data tool (https://www.epa.gov/outdoor-air-quality-data/download-daily-data)",
+ "pollutant": "Ozone (AQS parameter 44201)",
+ "statistic": "Daily maximum 8-hour average concentration",
+ "original_units": "ppm",
+ "converted_units": "ppb (ppm x 1000, rounded)",
+ "date": "2025-05-30",
+ "area": "Washington monitors west of 121 W longitude (Western Washington)",
+ "selection": "Of all 2025 dates, 05/30/2025 had the most Western Washington monitors reporting (9) and the highest mean concentration; one POC per site",
+ "stations": 9
+}
